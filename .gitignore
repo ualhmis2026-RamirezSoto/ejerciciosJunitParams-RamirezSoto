@@ -1,0 +1,7 @@
+.gradle/
+build/
+
+# Temporary files generated while inspecting the assignment PDF
+page_8.png
+sesion06.txt
+sesion06- pruebas parametrizadas - 2026.pdf
