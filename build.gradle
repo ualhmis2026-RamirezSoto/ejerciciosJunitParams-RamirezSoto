@@ -8,7 +8,7 @@ version = '1.0.0'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(22)
+        languageVersion = JavaLanguageVersion.of(24)
     }
 }
 
@@ -25,6 +25,19 @@ dependencies {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    
+    // Paralelizar tests para mayor velocidad
+    maxParallelForks = Runtime.runtime.availableProcessors()
+    
+    // Configurar memoria JVM para evitar OutOfMemory en proyectos grandes
+    jvmArgs = ['-Xmx512m', '-XX:+UseG1GC']
+    
+    // Mostrar progreso en tiempo real
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat 'full'
+        showStandardStreams false
+    }
 }
 
 jacoco {
@@ -39,8 +52,15 @@ jacocoTestReport {
     }
 }
 
-tasks.withType(Test).configureEach {
-    testLogging {
-        events 'passed', 'skipped', 'failed'
+// Tarea de prueba rápida para desarrollo (sin cobertura)
+task quickTest(type: Test) {
+    description = 'Ejecuta tests sin generar reporte de cobertura (más rápido)'
+    useJUnitPlatform()
+}
+
+// Optimizaciones de build
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.hasTask(test) && !taskGraph.hasTask(jacocoTestReport)) {
+        // Si no se pide cobertura, la construcción es más rápida
     }
 }

@@ -1,0 +1,29 @@
+{
+  "maven.view": "hierarchical",
+  "[java]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "redhat.java",
+    "editor.rulers": [80, 120]
+  },
+  "java.test.config": [
+    {
+      "name": "default",
+      "coverage": {
+        "appendResult": false
+      }
+    }
+  ],
+  "java.format.settings.url": "eclipse-formatter.xml",
+  "java.codeGeneration.useBlocks": true,
+  "java.completion.enabled": true,
+  "java.hover.enabled": true,
+  "java.maxConcurrentRequests": 5,
+  "java.symbols.maxWorkspaceSymbols": 0,
+  "files.watcherExclude": {
+    "**/.gradle": true,
+    "**/build": true,
+    "**/.git/objects": true
+  },
+  "java.codeGeneration.generateComments": false
+"java.configuration.updateBuildConfiguration": "interactive"
+}
